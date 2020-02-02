@@ -31,7 +31,7 @@ jobs:
           dotnet-version: "2.1.607"
 
       - name: Build sln
-        run: dotnet build
+        run: dotnet build MongoLabor/MongoLabor.sln
 
       - name: Evaluate
         uses: docker://akosdudas/sflab-ahk:mongo-2020

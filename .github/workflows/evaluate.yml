@@ -34,7 +34,7 @@ jobs:
         run: dotnet build mongolab.sln
 
       - name: Evaluate
-        uses: docker://akosdudas/sflab-ahk:mongo-2021
+        uses: docker://ghcr.io/bmeviauac01/sflab-ahk:mongo-2021
         env:
             DATABASE_CONNECTIONSTRING: "mongodb://mongo:27017/aaf"
 

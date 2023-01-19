@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "mongolab": {
+    "Bme.Swlab1.Mongo": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5000",

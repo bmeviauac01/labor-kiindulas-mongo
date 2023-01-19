@@ -1,61 +1,61 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Bme.Swlab1.Mongo.Dal;
+using Bme.Swlab1.Mongo.Models;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using mongolab.DAL;
-using mongolab.Models;
 
-namespace mongolab.Pages.Products
+using System.ComponentModel.DataAnnotations;
+
+namespace Bme.Swlab1.Mongo.Pages.Products;
+
+public class BuyModel : PageModel
 {
-    public class BuyModel : PageModel
-    {
-        private readonly IRepository repository;
+    private readonly IRepository _repository;
 
-        public BuyModel(IRepository repository)
+    public BuyModel(IRepository repository)
+    {
+        _repository = repository;
+    }
+
+    public Product Product { get; set; }
+
+    [BindProperty]
+    [Range(1, double.PositiveInfinity)]
+    public int Amount { get; set; }
+
+    public IActionResult OnGet(string id)
+    {
+        if (id == null)
         {
-            this.repository = repository;
+            return NotFound();
         }
 
-        public Product Product { get; set; }
-
-        [BindProperty]
-        [Range(1, double.PositiveInfinity)]
-        public int Amount { get; set; }
-
-        public IActionResult OnGet(string id)
+        Product = _repository.FindProduct(id);
+        if (Product == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
 
-            Product = repository.FindProduct(id);
+        return Page();
+    }
 
-            if (Product == null)
-            {
-                return NotFound();
-            }
+    public IActionResult OnPost(string id)
+    {
+        if (!ModelState.IsValid)
+        {
             return Page();
         }
 
-        public IActionResult OnPost(string id)
+        var success = _repository.SellProduct(id, Amount);
+        if (success)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var success = repository.SellProduct(id, Amount);
-
-            if (success)
-            {
-                return RedirectToPage("./Index");
-            }
-            else
-            {
-                Product = repository.FindProduct(id);
-                ModelState.AddModelError(nameof(Amount), "Not enough product in stock!");
-                return Page();
-            }
+            return RedirectToPage("./Index");
+        }
+        else
+        {
+            Product = _repository.FindProduct(id);
+            ModelState.AddModelError(nameof(Amount), "Not enough product in stock!");
+            return Page();
         }
     }
 }

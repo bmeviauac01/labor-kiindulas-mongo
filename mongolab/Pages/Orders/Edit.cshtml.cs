@@ -1,50 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bme.Swlab1.Mongo.Dal;
+using Bme.Swlab1.Mongo.Models;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using mongolab.DAL;
-using mongolab.Models;
 
-namespace mongolab.Pages.Orders
+namespace Bme.Swlab1.Mongo.Pages.Orders;
+
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
-    {
-        private readonly IRepository repository;
+    private readonly IRepository _repository;
 
-        public EditModel(IRepository repository)
+    public EditModel(IRepository repository)
+    {
+        _repository = repository;
+    }
+
+    [BindProperty]
+    public Order Order { get; set; }
+
+    public IActionResult OnGet(string id)
+    {
+        if (id == null)
         {
-            this.repository = repository;
+            return NotFound();
         }
 
-        [BindProperty]
-        public Order Order { get; set; }
-
-        public IActionResult OnGet(string id)
+        Order = _repository.FindOrder(id);
+        if (Order == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
 
-            Order = repository.FindOrder(id);
+        return Page();
+    }
 
-            if (Order == null)
-            {
-                return NotFound();
-            }
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
+        {
             return Page();
         }
 
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            bool success = repository.UpdateOrder(Order);
-            if (success)
-                return RedirectToPage("./Index");
-            else
-                return NotFound();
-        }
+        return _repository.UpdateOrder(Order)
+            ? RedirectToPage("./Index")
+            : NotFound();
     }
 }

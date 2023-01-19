@@ -1,35 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bme.Swlab1.Mongo.Dal;
+using Bme.Swlab1.Mongo.Models;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using mongolab.DAL;
-using mongolab.Models;
 
-namespace mongolab.Pages.Products
+namespace Bme.Swlab1.Mongo.Pages.Products;
+
+public class DetailsModel : PageModel
 {
-    public class DetailsModel : PageModel
+    private readonly IRepository _repository;
+
+    public DetailsModel(IRepository repository)
     {
-        private readonly IRepository repository;
+        _repository = repository;
+    }
 
-        public DetailsModel(IRepository repository)
+    public Product Product { get; set; }
+
+    public IActionResult OnGet(string id)
+    {
+        if (id == null)
         {
-            this.repository = repository;
+            return NotFound();
         }
 
-        public Product Product { get; set; }
-
-        public IActionResult OnGet(string id)
+        Product = _repository.FindProduct(id);
+        if (Product == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Product = repository.FindProduct(id);
-
-            if (Product == null)
-            {
-                return NotFound();
-            }
-            return Page();
+            return NotFound();
         }
+
+        return Page();
     }
 }

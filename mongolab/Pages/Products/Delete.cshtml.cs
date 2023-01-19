@@ -1,47 +1,47 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bme.Swlab1.Mongo.Dal;
+using Bme.Swlab1.Mongo.Models;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using mongolab.DAL;
-using mongolab.Models;
 
-namespace mongolab.Pages.Products
+namespace Bme.Swlab1.Mongo.Pages.Products;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly IRepository _repository;
+
+    public DeleteModel(IRepository repository)
     {
-        private readonly IRepository repository;
+        _repository = repository;
+    }
 
-        public DeleteModel(IRepository repository)
+    public Product Product { get; set; }
+
+    public IActionResult OnGet(string id)
+    {
+        if (id == null)
         {
-            this.repository = repository;
+            return NotFound();
         }
 
-        public Product Product { get; set; }
-
-        public IActionResult OnGet(string id)
+        Product = _repository.FindProduct(id);
+        if (Product == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
+        
+        return Page();
+    }
 
-            Product = repository.FindProduct(id);
-
-            if (Product == null)
-            {
-                return NotFound();
-            }
-            return Page();
+    public IActionResult OnPost(string id)
+    {
+        if (id == null)
+        {
+            return NotFound();
         }
 
-        public IActionResult OnPost(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        _repository.DeleteProduct(id);
 
-            repository.DeleteProduct(id);
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

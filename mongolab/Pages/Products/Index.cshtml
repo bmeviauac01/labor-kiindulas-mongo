@@ -1,5 +1,5 @@
 ﻿@page
-@model mongolab.Pages.Products.IndexModel
+@model Bme.Swlab1.Mongo.Pages.Products.IndexModel
 
 @{
     ViewData["Title"] = "Products";
@@ -39,9 +39,9 @@
                     @Html.DisplayFor(modelItem => item.Stock)
                 </td>
                 <td>
-                    <a asp-page="./Buy" asp-route-id="@item.ID">Buy</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-page="./Buy" asp-route-id="@item.Id">Buy</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }

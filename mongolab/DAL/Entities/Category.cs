@@ -1,13 +1,12 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace mongolab.DAL.Entities
+namespace Bme.Swlab1.Mongo.Dal.Entities;
+
+public class Category
 {
-    public class Category
-    {
-        [BsonId]
-        public ObjectId ID { get; set; }
-        public string Name { get; set; }
-        public ObjectId? ParentCategoryID { get; set; }
-    }
+    [BsonId]
+    public ObjectId Id { get; set; }
+    public string Name { get; set; }
+    public ObjectId? ParentCategoryId { get; set; }
 }

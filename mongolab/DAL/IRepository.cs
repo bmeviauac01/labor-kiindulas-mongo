@@ -1,26 +1,24 @@
-﻿using System.Collections.Generic;
-using mongolab.Models;
+﻿using Bme.Swlab1.Mongo.Models;
 
-namespace mongolab.DAL
+namespace Bme.Swlab1.Mongo.Dal;
+
+public interface IRepository
 {
-    public interface IRepository
-    {
-        IList<Product> ListProducts();
-        Product FindProduct(string id);
-        void InsertProduct(Product product);
-        bool SellProduct(string id, int amount);
-        void DeleteProduct(string id);
+    IList<Product> ListProducts();
+    Product FindProduct(string id);
+    void InsertProduct(Product product);
+    bool SellProduct(string id, int amount);
+    void DeleteProduct(string id);
 
-        IList<Category> ListCategories();
+    IList<Category> ListCategories();
 
-        IList<Order> ListOrders(string status);
-        Order FindOrder(string id);
-        void InsertOrder(Order order, Product product, int amount);
-        bool UpdateOrder(Order order);
-        void DeleteOrder(string id);
+    IList<Order> ListOrders(string status);
+    Order FindOrder(string id);
+    void InsertOrder(Order order, Product product, int amount);
+    bool UpdateOrder(Order order);
+    void DeleteOrder(string id);
 
-        IList<Customer> ListCustomers();
+    IList<Customer> ListCustomers();
 
-        OrderGroups GroupOrders(int groupsCount);
-    }
+    OrderGroups GroupOrders(int groupsCount);
 }

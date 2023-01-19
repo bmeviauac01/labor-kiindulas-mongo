@@ -1,18 +1,21 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Bme.Swlab1.Mongo.Dal;
 
-namespace mongolab
+namespace Bme.Swlab1.Mongo;
+
+public class Program
 {
-    public class Program
+    private static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            CreateWebHostBuilder(args).Build().Run();
-        }
+        var builder = WebApplication.CreateBuilder(args);
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseUrls("http://localhost:5000");
+        builder.Services.AddRazorPages();
+        builder.Services.AddMongoConnection();
+        builder.Services.AddTransient<IRepository, Repository>();
+
+        var app = builder.Build();
+
+        app.MapRazorPages();
+
+        app.Run();
     }
 }

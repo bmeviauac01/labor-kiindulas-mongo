@@ -1,18 +1,17 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace mongolab.DAL.Entities
-{
-    [BsonIgnoreExtraElements]
-    public class Product
-    {
-        [BsonId]
-        public ObjectId ID { get; set; }
-        public ObjectId? CategoryID { get; set; }
+namespace Bme.Swlab1.Mongo.Dal.Entities;
 
-        public string Name { get; set; }
-        public double? Price { get; set; }
-        public int? Stock { get; set; }
-        public VAT VAT { get; set; }
-    }
+[BsonIgnoreExtraElements]
+public class Product
+{
+    [BsonId]
+    public ObjectId Id { get; set; }
+    public ObjectId? CategoryId { get; set; }
+
+    public string Name { get; set; }
+    public double? Price { get; set; }
+    public int? Stock { get; set; }
+    public Vat Vat { get; set; }
 }

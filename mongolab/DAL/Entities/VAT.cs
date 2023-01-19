@@ -1,8 +1,7 @@
-namespace mongolab.DAL.Entities
+namespace Bme.Swlab1.Mongo.Dal.Entities;
+
+public class Vat
 {
-    public class VAT
-    {
-        public string Name { get; set; }
-        public int? Percentage { get; set; }
-    }
+    public string Name { get; set; }
+    public int? Percentage { get; set; }
 }

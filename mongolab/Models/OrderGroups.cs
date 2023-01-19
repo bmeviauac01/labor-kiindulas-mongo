@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Bme.Swlab1.Mongo.Models;
 
-namespace mongolab.Models
+public class OrderGroups
 {
-    public class OrderGroups
-    {
-        public IList<DateTime> Thresholds { get; set; }
-        public IList<OrderGroup> Groups { get; set; }
-    }
+    public List<DateTime> Thresholds { get; set; }
+    public List<OrderGroup> Groups { get; set; }
 }

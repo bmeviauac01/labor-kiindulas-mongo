@@ -1,9 +1,15 @@
 ﻿using Bme.Swlab1.Mongo.Models;
 
+using MongoDB.Driver;
+
 namespace Bme.Swlab1.Mongo.Dal;
 
 public class Repository : IRepository
 {
+    public Repository(IMongoDatabase database)
+    {
+    }
+
     public IList<Product> ListProducts()
     {
         throw new NotImplementedException();

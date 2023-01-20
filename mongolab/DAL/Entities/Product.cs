@@ -8,6 +8,7 @@ public class Product
 {
     [BsonId]
     public ObjectId Id { get; set; }
+    [BsonElement("categoryID")]
     public ObjectId? CategoryId { get; set; }
 
     public string Name { get; set; }

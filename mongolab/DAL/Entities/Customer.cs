@@ -14,6 +14,7 @@ public class Customer
     public string Password { get; set; }
     public string Email { get; set; }
 
+    [BsonElement("mainSiteID")]
     public ObjectId MainSiteId { get; set; }
     public CustomerSite[] Sites { get; set; }
 }

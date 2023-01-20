@@ -16,7 +16,7 @@ public static class MongoConnectionConfig
             return new MongoClient(@"mongodb://localhost:27017");
         });
 
-        services.AddSingleton<IMongoDatabase>(serviceProvider =>
+        services.AddSingleton(serviceProvider =>
         {
             var client = serviceProvider.GetRequiredService<IMongoClient>();
 

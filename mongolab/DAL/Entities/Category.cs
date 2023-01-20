@@ -8,5 +8,6 @@ public class Category
     [BsonId]
     public ObjectId Id { get; set; }
     public string Name { get; set; }
+    [BsonElement("parentCategoryID")]
     public ObjectId? ParentCategoryId { get; set; }
 }

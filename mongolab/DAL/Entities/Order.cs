@@ -7,7 +7,9 @@ public class Order
 {
     [BsonId]
     public ObjectId Id { get; set; }
+    [BsonElement("customerID")]
     public ObjectId? CustomerId { get; set; }
+    [BsonElement("siteID")]
     public ObjectId? SiteId { get; set; }
 
     public DateTime? Date { get; set; }

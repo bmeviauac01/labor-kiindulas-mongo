@@ -28,7 +28,7 @@ jobs:
       - name: Prepare .NET SDK
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: "3.1.415"
+          dotnet-version: "6.0.x"
 
       - name: Build sln
         run: dotnet build mongolab.sln

@@ -1,24 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using mongolab.DAL;
-using mongolab.Models;
-using System.Collections.Generic;
+﻿using Bme.Swlab1.Mongo.Dal;
+using Bme.Swlab1.Mongo.Models;
 
-namespace mongolab.Pages.Products
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace Bme.Swlab1.Mongo.Pages.Products;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly IRepository _repository;
+
+    public IndexModel(IRepository repository)
     {
-        private readonly IRepository repository;
+        _repository = repository;
+    }
 
-        public IndexModel(IRepository repository)
-        {
-            this.repository = repository;
-        }
+    public IList<Product> Products { get; set; }
 
-        public IList<Product> Products { get; set; }
-
-        public void OnGet()
-        {
-            Products = repository.ListProducts();
-        }
+    public void OnGet()
+    {
+        Products = _repository.ListProducts();
     }
 }

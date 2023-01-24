@@ -1,5 +1,5 @@
 ﻿@page
-@model mongolab.Pages.Products.DetailsModel
+@model Bme.Swlab1.Mongo.Pages.Products.DetailsModel
 
 @{
     ViewData["Title"] = "Product details";
@@ -32,6 +32,6 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Buy" asp-route-id="@Model.Product.ID">Buy</a> |
+    <a asp-page="./Buy" asp-route-id="@Model.Product.Id">Buy</a> |
     <a asp-page="./Index">Back to list</a>
 </div>

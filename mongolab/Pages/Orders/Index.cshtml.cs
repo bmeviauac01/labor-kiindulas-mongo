@@ -1,28 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using Bme.Swlab1.Mongo.Dal;
+using Bme.Swlab1.Mongo.Models;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using mongolab.DAL;
-using mongolab.Models;
 
-namespace mongolab.Pages.Orders
+namespace Bme.Swlab1.Mongo.Pages.Orders;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly IRepository _repository;
+
+    public IndexModel(IRepository repository)
     {
-        private readonly IRepository repository;
+        _repository = repository;
+    }
 
-        public IndexModel(IRepository repository)
-        {
-            this.repository = repository;
-        }
+    public IList<Order> Orders { get; set; }
 
-        public IList<Order> Orders { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public string Status { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public string Status { get; set; }
-
-        public void OnGet()
-        {
-            Orders = repository.ListOrders(Status);
-        }
+    public void OnGet()
+    {
+        Orders = _repository.ListOrders(Status);
     }
 }

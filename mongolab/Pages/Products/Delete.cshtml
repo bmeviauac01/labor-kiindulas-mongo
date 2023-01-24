@@ -1,5 +1,5 @@
 ﻿@page
-@model mongolab.Pages.Products.DeleteModel
+@model Bme.Swlab1.Mongo.Pages.Products.DeleteModel
 
 @{
     ViewData["Title"] = "Delete product";
@@ -33,7 +33,7 @@
     </dl>
 
     <form method="post">
-        <input type="hidden" asp-for="Product.ID" />
+        <input type="hidden" asp-for="Product.Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-page="./Index">Back to list</a>
     </form>

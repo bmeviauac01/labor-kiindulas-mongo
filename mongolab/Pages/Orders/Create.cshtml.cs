@@ -34,7 +34,7 @@ public class CreateModel : PageModel
     public void OnGet()
     {
         var termekek = _repository.ListProducts();
-        Products = new SelectList(termekek, "ID", "Name");
+        Products = new SelectList(termekek, nameof(Product.Id), nameof(Product.Name));
     }
 
     public IActionResult OnPost()
